@@ -1,6 +1,6 @@
 {
   "name": "@makarandkate/udyam-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Udyam Api",
   "main": "lib/index.js",
   "types": "lib",

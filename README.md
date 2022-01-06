@@ -31,3 +31,10 @@ UdyamApi.getCertificate({
     email:""
 })
 ```
+## Generate Link 
+
+```
+let link=await UdyamApi.generateLink("7588763862").catch(err=>{
+        console.log(err);
+});
+```

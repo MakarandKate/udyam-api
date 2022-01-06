@@ -37,4 +37,29 @@ export class UdyamApi{
             resolve(resultArr);
         });
     }
+
+
+    public static generateLink(phone:string):Promise<string>{
+        let link:string="";
+        return new Promise(async (resolve,reject)=>{
+            try{
+                let resObj=await Network.POST({
+                    url:'/generateLink',
+                    body:{
+                        phone
+                    }
+                })
+                if(resObj.status=="success" && resObj.link){
+                    link=resObj.link;
+                }else if(resObj.link){
+                    link=resObj.link;
+                }
+                
+            }catch(err){
+                reject(err);
+            }
+            resolve(link);
+        });
+    }
+    
 }

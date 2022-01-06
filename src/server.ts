@@ -23,19 +23,17 @@ app.set("views", viewsDir);
 const staticDir = path.join(__dirname, "public");
 app.use(express.static(staticDir));
 UdyamApi.init({
-    mode:CredMode.test,
+    mode:CredMode.prod,
     apiKey:Env.apiKey,
     pemKeyPath:Env.pemKeyPath
 })
 app.get('/',async (req:Request,res:Response)=>{
     
-    let lookUp=await UdyamApi.getCertificate({
-        phone:""
-    }).catch(err=>{
+    let link=await UdyamApi.generateLink("7588763862").catch(err=>{
         console.log(err);
     })
     res.render("index",{
-        data:JSON.stringify(lookUp)
+        data:JSON.stringify(link)
 	});
 })
 
