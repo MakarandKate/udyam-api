@@ -1,0 +1,7 @@
+{
+    "watch": ["src"],
+    "ext": "ts",
+    "ignore": ["src/public"],
+    "exec": "ts-node-dev -r tsconfig-paths/register ./src/server --env=development --no-notify --respawn --transpile-only"
+  }
+  
