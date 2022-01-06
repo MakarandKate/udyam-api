@@ -11,23 +11,20 @@ To obtain API credentials contact admin
 `npm i @makarandkate/udyam-api`
 
 # Initialization
-`
-import { UdyamApi } from '@makarandkate/udyam-api'
-import { CredMode } from '@makarandkate/udyam-api/lib/models/Creds';
+`import { UdyamApi } from '@makarandkate/udyam-api';`
+`import { CredMode } from '@makarandkate/udyam-api/lib/models/Creds';`
 
-UdyamApi.init({
-    mode:CredMode.test,
-    apiKey:"API_KEY",
-    pemKeyPath:"path_to_key_file"
-})
+`UdyamApi.init({`
+`    mode:CredMode.test,`
+`    apiKey:"API_KEY",`
+`    pemKeyPath:"path_to_key_file"`
+`})`
 
-`
+
 
 # Usage
 ## Get Certificate
-`
-UdyamApi.getCertificate({
-    phone:"",
-    email:""
-})
-`
+`UdyamApi.getCertificate({`
+    `phone:"",`
+    `email:""`
+`})`
