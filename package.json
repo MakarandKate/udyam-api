@@ -1,6 +1,6 @@
 {
   "name": "@makarandkate/udyam-api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Udyam Api",
   "main": "lib/index.js",
   "types": "lib",
@@ -21,10 +21,8 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
-    "@types/node-rsa": "^1.1.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.0",
-    "node-rsa": "^1.1.1",
     "request": "^2.88.2"
   }
 }

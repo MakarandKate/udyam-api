@@ -6,10 +6,16 @@ import { CredMode, Creds } from "./models/Creds";
 
 export class UdyamApi{
 
-    public static init(params:{mode:CredMode,apiKey:string,pemKeyPath:string}){
+    public static init(params:{
+        mode:CredMode,
+        apiToken:string,
+        serverPublicKeyPath:string,
+        clientPrivateKeyPath:string
+    }){
         Creds.mode=params.mode;
-        Creds.apiKey=params.apiKey;
-        Creds.pemKey=fs.readFileSync(params.pemKeyPath).toString();
+        Creds.apiToken=params.apiToken;
+        Creds.serverPublicKey=fs.readFileSync(params.serverPublicKeyPath).toString();
+        Creds.clientPrivateKey=fs.readFileSync(params.clientPrivateKeyPath).toString();
     }
 
     public static getCertificate(params:LookUpParams):Promise<CertificateDetails[]>{

@@ -1,4 +1,5 @@
 export class Env{
-    public static apiKey:string="";
-    public static pemKeyPath:string="";
+    public static apiToken:string="";
+    public static clientPrivateKeyPath:string="";
+    public static serverPublicKeyPath:string="";
 }

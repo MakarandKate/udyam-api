@@ -1,7 +1,8 @@
 export class Creds{
     public static mode:CredMode;
-    public static apiKey:string;
-    public static pemKey:string;
+    public static apiToken:string;
+    public static serverPublicKey:string;
+    public static clientPrivateKey:string;
 }
 export enum CredMode{
     test="TESTING",

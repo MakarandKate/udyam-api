@@ -1,23 +1,38 @@
 const request = require('request');
-const fs = require('fs');
-import NodeRSA from 'node-rsa';
+import crypto from 'crypto';
 import { CredMode, Creds } from '../models/Creds';
 export default class Network{
     private static BASE_URL="https://udyamadharregistration.com/api/kappa";
 
     private static encrypt(payload:any){
-        let cert=Creds.pemKey.replace(/\\n/g,'\n');
-        const key = new NodeRSA(cert);
-        const encrypted= key.encrypt(JSON.stringify({...payload}));
-        let encryptStr=Buffer.from(encrypted).toString('base64');
+        let str=JSON.stringify(payload);
+        let encStrArr=str.match(/.{1,470}/g);
+        let serverPublicKey=Creds.serverPublicKey.replace(/\\n/g,'\n');
+        let encMsgArr=[];
+        let encryptStr="";
+        try{
+            for(let i=0;i<encStrArr.length;i++){
+                encMsgArr.push(crypto.publicEncrypt({
+                    key:serverPublicKey
+                }, Buffer.from(encStrArr[i])).toString("base64"))
+            }
+            encryptStr=encMsgArr.join(",");
+            
+        }catch(err){
+
+        }
+        
         return encryptStr;
     }
 
     private static decrypt(encData:string):any{
-        let cert=Creds.pemKey.replace(/\\n/g,'\n');
-        const key = new NodeRSA(cert);
-        let encBuffer= Buffer.from(encData, 'base64')
-        const decrypted = key.decrypt(encBuffer, 'utf8');
+        let clientPrivateKey=Creds.clientPrivateKey.replace(/\\n/g,'\n');
+        let encDataArr=encData.split(",");
+        let decDataArr=[];
+        for(let i=0;i<encDataArr.length;i++){
+            decDataArr.push(crypto.privateDecrypt({key:clientPrivateKey}, Buffer.from(encDataArr[i], "base64")).toString("utf8"))
+        }
+        let decrypted=decDataArr.join();
         let obj={};
         try{
             obj=JSON.parse(decrypted);
@@ -41,7 +56,7 @@ export default class Network{
             url:this.BASE_URL+param.url,
             method:"POST",
             headers:{
-                "x-api-key":Creds.mode===CredMode.test? "TESTING" :Creds.apiKey,
+                "x-api-token":Creds.mode===CredMode.test? "TESTING" :Creds.apiToken,
                 'Content-Type': 'application/json'
             },
             body:bodyStr

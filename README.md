@@ -16,8 +16,9 @@ import { UdyamApi } from '@makarandkate/udyam-api';
 import { CredMode } from '@makarandkate/udyam-api/lib/models/Creds';
 UdyamApi.init({
     mode:CredMode.test,
-    apiKey:"API_KEY",
-    pemKeyPath:"path_to_key_file"
+    apiToken:"API_TOKEN",
+    serverPublicKeyPath:"path_to_public_key",
+    clientPrivateKeyPath:"path_to_private_key"
 })
 ```
 

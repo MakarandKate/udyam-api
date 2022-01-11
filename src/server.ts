@@ -24,16 +24,19 @@ const staticDir = path.join(__dirname, "public");
 app.use(express.static(staticDir));
 UdyamApi.init({
     mode:CredMode.prod,
-    apiKey:Env.apiKey,
-    pemKeyPath:Env.pemKeyPath
+    apiToken:Env.apiToken,
+    serverPublicKeyPath:Env.serverPublicKeyPath,
+    clientPrivateKeyPath:Env.clientPrivateKeyPath
 })
 app.get('/',async (req:Request,res:Response)=>{
     
-    let link=await UdyamApi.generateLink("7588763862").catch(err=>{
+    let arr=await UdyamApi.getCertificate({
+        phone:""
+    }).catch(err=>{
         console.log(err);
     })
     res.render("index",{
-        data:JSON.stringify(link)
+        data:JSON.stringify(arr)
 	});
 })
 
